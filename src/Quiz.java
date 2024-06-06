@@ -12,7 +12,7 @@ public class Quiz
         this.speed = speed;
     }
     // Car questions method made to give the user a quiz about the car information
-    public Integer carQuestions(Car[] all)
+    public String carQuestions(Car[] all)
     {
         int userInput = 0;
         int score = 0;
@@ -29,17 +29,15 @@ public class Quiz
                     if (userInput > all[i].getSpeed()) //Checking if the userInput is equivalent to that of the car speed
                     {
 
-                        System.out.println("Too High."); //If too high, the user is told, then prompted to guess again
-                        System.out.println("\nGuess a different speed (Or enter \"0\" to quit.): ");
+                        System.out.println("INCORRECT! Too High.(Enter Any number to continue or enter "0" to quit.): "); 
+                        //If too high, the user is told, then prompted to continue to the next car
                         userInput = guess.nextInt();
-                        i--;
                     }
                     else if (userInput < all[i].getSpeed() && userInput != 0)
                     {
-                        System.out.println("Too Low."); // If too low, the user is told, then prompted to guess again
-                        System.out.println("Guess a different speed (Or enter \"0\" to quit.)");
-                        i--;
-
+                        System.out.println("INCORRECT! Too Low.(Enter Any number to continue or enter "0" to quit.): "); 
+                        // If too low, the user is told, then prompted to continue to the next car
+                        userInput = guess.nextInt();
                     }
                     else if (userInput == all[i].getSpeed())  //If the user guesses correctly, then go onto the next car
                     {
@@ -56,21 +54,25 @@ public class Quiz
             }
         if(score == 4) //return the score percentage
         {
-            score = 100;
-            return score;
+            String output = "% Correct";
+            score = score * 25;
+            return score + output;
         }
         else if(score == 3)
         {
-            return 75;
+            score = score * 25;
+            return score + output;
         }
         else if(score == 2)
         {
-            return 50;
+            score = score * 25;
+            return score + output;
         }
         else if(score == 1)
         {
-            return 25;
+            score = score * 25;
+            return score + output;
         }
-        return 0;
+        return score + output;
     }
 }
